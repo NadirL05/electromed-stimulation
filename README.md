@@ -2,6 +2,43 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Getting Started
+
+### Installation
+
+```bash
+npm install
+```
+
+### Configuration (Optionnel)
+
+L'application fonctionne sans configuration Supabase. Si vous souhaitez utiliser les fonctionnalités backend :
+
+1. Copiez le fichier `.env.example` vers `.env`
+2. Remplissez les variables d'environnement Supabase
+
+```bash
+cp .env.example .env
+```
+
+### Lancement du serveur de développement
+
+```bash
+npm run dev
+```
+
+Ouvrez [http://localhost:5173](http://localhost:5173) dans votre navigateur.
+
+### Build
+
+```bash
+npm run build
+```
+
+---
+
+## Template Information
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh

@@ -18,6 +18,13 @@ export function useAuthInit() {
     import('../lib/supabase')
       .then((module) => {
         const supabase: SupabaseClient<Database> = module.supabase
+        const isConfigured = module.isSupabaseConfigured
+
+        // Skip auth si Supabase n'est pas configuré
+        if (!isConfigured) {
+          console.log('🔶 Mode démo - authentification désactivée')
+          return
+        }
 
         // Récupère l'utilisateur au chargement
         fetchUser()

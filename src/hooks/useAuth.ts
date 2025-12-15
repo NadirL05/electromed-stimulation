@@ -17,7 +17,7 @@ export function useAuth() {
     // Écoute les changements d'état d'authentification
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event, _session) => {
       console.log('🔄 Événement auth:', event)
 
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {

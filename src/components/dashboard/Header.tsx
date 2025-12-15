@@ -1,6 +1,5 @@
 import { Bell, Menu, User, LogOut, Coins } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
-import { Badge } from '../ui/Badge'
 import { useNavigate } from 'react-router-dom'
 
 interface HeaderProps {

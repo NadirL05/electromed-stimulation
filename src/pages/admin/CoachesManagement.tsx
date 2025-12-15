@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Plus, Edit, Trash2 } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { Button } from '../../components/ui/Button'
 import DataTable from '../../components/admin/DataTable'
 import AddCoachModal from '../../components/admin/AddCoachModal'

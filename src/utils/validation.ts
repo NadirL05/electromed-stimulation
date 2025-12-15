@@ -28,7 +28,7 @@ export const contactSchema = z.object({
 })
 
 export const bookingSchema = z.object({
-  date: z.date({ required_error: 'La date est obligatoire' }),
+  date: z.date({ message: 'La date est obligatoire' }),
   time: z.string().min(1, "L'heure est obligatoire"),
   serviceId: z.string().min(1, 'Le service est obligatoire'),
 })

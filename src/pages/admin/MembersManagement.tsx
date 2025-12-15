@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Search, Edit, CreditCard } from 'lucide-react'
+import { Search, CreditCard } from 'lucide-react'
 import DataTable from '../../components/admin/DataTable'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
@@ -46,7 +46,13 @@ export default function MembersManagement() {
         .select('user_id')
         .eq('franchise_id', franchise.id)
 
-      const userIds = [...new Set(sessions?.map((s) => s.user_id).filter(Boolean) || [])]
+      const userIds = [
+        ...new Set(
+          sessions
+            ?.map((s) => s.user_id)
+            .filter((id): id is string => Boolean(id)) || []
+        ),
+      ]
 
       if (userIds.length === 0) {
         setMembers([])
@@ -56,7 +62,7 @@ export default function MembersManagement() {
 
       const { data: profiles } = await supabase
         .from('user_profiles')
-        .select('id, full_name, email, phone, credits')
+        .select('id, full_name, phone, credits')
         .in('id', userIds)
 
       // Récupérer les stats de séances par membre
@@ -73,7 +79,7 @@ export default function MembersManagement() {
           return {
             id: profile.id,
             full_name: profile.full_name || 'N/A',
-            email: profile.email || 'N/A',
+            email: 'Email non disponible',
             phone: profile.phone || '',
             credits: profile.credits || 0,
             total_sessions: memberSessions?.length || 0,

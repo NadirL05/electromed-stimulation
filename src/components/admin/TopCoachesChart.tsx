@@ -41,7 +41,10 @@ export default function TopCoachesChart({ data }: TopCoachesChartProps) {
             borderRadius: '8px',
             color: '#fff',
           }}
-          formatter={(value: number) => [`${value} séances`, 'Séances']}
+          formatter={(value: number | string | undefined) => {
+            const numericValue = typeof value === 'number' ? value : 0
+            return [`${numericValue} séances`, 'Séances']
+          }}
         />
         <Bar dataKey="sessions" fill="#f97316" radius={[0, 4, 4, 0]} />
       </BarChart>

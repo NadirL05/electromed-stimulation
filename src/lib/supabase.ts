@@ -1,17 +1,19 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-if (!supabaseUrl) {
-  throw new Error('VITE_SUPABASE_URL est manquant dans les variables d’environnement')
+// Créer le client Supabase uniquement si les variables d'environnement sont définies
+// Note: supabase sera null si les variables d'environnement ne sont pas configurées
+export const supabase: SupabaseClient | null = (supabaseUrl && supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null
+
+// Afficher les messages uniquement en développement
+if (import.meta.env.DEV) {
+  if (supabase) {
+    console.log('✅ Supabase connecté')
+  } else {
+    console.warn('⚠️ Supabase non configuré - Les variables VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY ne sont pas définies')
+  }
 }
-
-if (!supabaseAnonKey) {
-  throw new Error('VITE_SUPABASE_ANON_KEY est manquant dans les variables d’environnement')
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-console.log('✅ Supabase connecté')
-

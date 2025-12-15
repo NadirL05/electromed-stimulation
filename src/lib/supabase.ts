@@ -1,19 +1,25 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
+import type { Database } from '../types/supabase'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const env = (import.meta as unknown as { env?: Record<string, string | undefined> }).env ?? {}
+const supabaseUrl = env.VITE_SUPABASE_URL
+const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY
 
-// Créer le client Supabase uniquement si les variables d'environnement sont définies
-// Note: supabase sera null si les variables d'environnement ne sont pas configurées
-export const supabase: SupabaseClient | null = (supabaseUrl && supabaseAnonKey)
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null
+const hasUrl = !!supabaseUrl && supabaseUrl !== 'https://your-project.supabase.co'
+const hasKey = !!supabaseAnonKey && supabaseAnonKey !== 'your-anon-key'
 
-// Afficher les messages uniquement en développement
-if (import.meta.env.DEV) {
-  if (supabase) {
-    console.log('✅ Supabase connecté')
-  } else {
-    console.warn('⚠️ Supabase non configuré - Les variables VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY ne sont pas définies')
-  }
+if (!hasUrl || !hasKey) {
+  console.error('❌ Variables Supabase manquantes ou placeholders. Vérifiez .env.local')
+  throw new Error('Variables Supabase manquantes : VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY')
+}
+
+export const supabase = createClient<Database>(
+  supabaseUrl!,
+  supabaseAnonKey!
+)
+
+if (hasUrl && hasKey) {
+  console.log('✅ Supabase connecté')
+} else {
+  console.warn('⚠️ Supabase non configuré : ajoutez VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans .env.local')
 }

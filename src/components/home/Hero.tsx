@@ -1,32 +1,61 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { Sparkles, ArrowRight } from 'lucide-react'
 import { Button } from '../ui/Button'
+import { useAuthModals } from '../../contexts/AuthModalContext'
+import { useAuthStore } from '../../stores/authStore'
 
 export default function Hero() {
+  const { openSignup } = useAuthModals()
+  const { isAuthenticated } = useAuthStore()
+
   return (
-    <section className="grid gap-10 md:grid-cols-2 md:items-center">
+    <section className="grid gap-10 py-8 md:grid-cols-2 md:items-center md:py-12">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="space-y-6"
       >
-        <p className="inline-flex items-center gap-2 rounded-full bg-[#DBEAFE] px-3 py-1 text-xs font-semibold text-[#1D4ED8] ring-1 ring-[#93C5FD]">
+        <motion.p 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#E0E7FF] px-4 py-1.5 text-xs font-semibold text-[#1D4ED8] ring-1 ring-[#93C5FD]/50"
+        >
+          <Sparkles className="h-3.5 w-3.5" />
           Plateforme SaaS d&apos;électrostimulation médicale
-        </p>
-        <h1 className="text-3xl font-bold leading-tight text-[#111827] sm:text-4xl lg:text-5xl">
-          Transformez votre corps avec l&apos;électrostimulation médicale
+        </motion.p>
+        <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-[#111827] sm:text-4xl lg:text-5xl">
+          Transformez votre corps avec{' '}
+          <span className="bg-gradient-to-r from-[#2563EB] to-[#10B981] bg-clip-text text-transparent">
+            l&apos;électrostimulation
+          </span>{' '}
+          médicale
         </h1>
-        <p className="max-w-xl text-base text-[#4B5563] sm:text-lg">
+        <p className="max-w-xl text-base leading-relaxed text-[#4B5563] sm:text-lg">
           ElectroMed centralise la gestion de vos séances EMS : planning intelligent, suivi
           des résultats et gestion des abonnements, pour vos franchises et vos coachs.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <Button variant="primary" size="lg">
-            Essayer gratuitement
-          </Button>
-          <Button variant="secondary" size="lg">
-            En savoir plus
-          </Button>
+          {isAuthenticated ? (
+            <Link to="/dashboard">
+              <Button variant="primary" size="lg">
+                Accéder à mon espace
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="primary" size="lg" onClick={openSignup}>
+              Essayer gratuitement
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          )}
+          <Link to="/services">
+            <Button variant="secondary" size="lg">
+              En savoir plus
+            </Button>
+          </Link>
         </div>
         <div className="mt-4 flex flex-wrap gap-4 text-xs text-[#6B7280] sm:text-sm">
           <div className="flex items-center gap-2">

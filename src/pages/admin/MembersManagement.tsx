@@ -62,7 +62,7 @@ export default function MembersManagement() {
 
       const { data: profiles } = await supabase
         .from('user_profiles')
-        .select('id, full_name, phone, credits, email')
+        .select('id, full_name, phone, credits')
         .in('id', userIds)
 
       // Récupérer les stats de séances par membre
@@ -79,7 +79,7 @@ export default function MembersManagement() {
           return {
             id: profile.id,
             full_name: profile.full_name || 'N/A',
-            email: profile.email || 'Email non disponible',
+            email: 'Non disponible',
             phone: profile.phone || '',
             credits: profile.credits || 0,
             total_sessions: memberSessions?.length || 0,

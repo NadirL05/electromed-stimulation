@@ -15,11 +15,17 @@ npm install
 L'application fonctionne sans configuration Supabase. Si vous souhaitez utiliser les fonctionnalités backend :
 
 1. Copiez le fichier `.env.example` vers `.env`
-2. Remplissez les variables d'environnement Supabase
+2. Remplissez les variables d'environnement Supabase avec vos credentials
 
 ```bash
 cp .env.example .env
 ```
+
+Ensuite, éditez le fichier `.env` et remplacez :
+- `VITE_SUPABASE_URL` avec l'URL de votre projet Supabase
+- `VITE_SUPABASE_ANON_KEY` avec votre clé anonyme Supabase
+
+Lorsque l'application démarre avec une configuration Supabase valide, vous verrez le message "✅ Supabase connecté" dans la console du navigateur.
 
 ### Lancement du serveur de développement
 

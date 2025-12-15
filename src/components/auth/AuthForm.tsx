@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AlertCircle, ArrowRight, Lock, Mail, User } from 'lucide-react'
 import { loginSchema, signupSchema, type LoginFormValues, type SignupFormValues } from '../../utils/validation'
 import { Input } from '../ui/Input'
 import { Button } from '../ui/Button'
@@ -64,55 +65,95 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {!isLogin && (
-        <Input
-          label="Nom complet"
-          {...register('fullName' as const)}
-          error={(errors as Record<string, { message?: string }>)?.fullName?.message}
-        />
+        <div className="relative">
+          <User className="pointer-events-none absolute left-4 top-[38px] h-5 w-5 text-[#9CA3AF]" />
+          <Input
+            label="Nom complet"
+            placeholder="Jean Dupont"
+            className="pl-12"
+            {...register('fullName' as const)}
+            error={(errors as Record<string, { message?: string }>)?.fullName?.message}
+          />
+        </div>
       )}
-      <Input
-        label="Email"
-        type="email"
-        autoComplete="email"
-        {...register('email' as const)}
-        error={errors.email?.message as string | undefined}
-      />
-      <Input
-        label="Mot de passe"
-        type="password"
-        autoComplete={isLogin ? 'current-password' : 'new-password'}
-        {...register('password' as const)}
-        error={errors.password?.message as string | undefined}
-      />
-      {!isLogin && (
+      
+      <div className="relative">
+        <Mail className="pointer-events-none absolute left-4 top-[38px] h-5 w-5 text-[#9CA3AF]" />
         <Input
-          label="Confirmation du mot de passe"
+          label="Email"
+          type="email"
+          placeholder="vous@exemple.com"
+          autoComplete="email"
+          className="pl-12"
+          {...register('email' as const)}
+          error={errors.email?.message as string | undefined}
+        />
+      </div>
+      
+      <div className="relative">
+        <Lock className="pointer-events-none absolute left-4 top-[38px] h-5 w-5 text-[#9CA3AF]" />
+        <Input
+          label="Mot de passe"
           type="password"
-          autoComplete="new-password"
-          {...register('confirmPassword' as const)}
-          error={(errors as Record<string, { message?: string }>)?.confirmPassword?.message}
+          placeholder="••••••••"
+          autoComplete={isLogin ? 'current-password' : 'new-password'}
+          className="pl-12"
+          hint={!isLogin ? 'Min. 8 caractères, 1 majuscule, 1 chiffre' : undefined}
+          {...register('password' as const)}
+          error={errors.password?.message as string | undefined}
         />
+      </div>
+      
+      {!isLogin && (
+        <div className="relative">
+          <Lock className="pointer-events-none absolute left-4 top-[38px] h-5 w-5 text-[#9CA3AF]" />
+          <Input
+            label="Confirmation du mot de passe"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="new-password"
+            className="pl-12"
+            {...register('confirmPassword' as const)}
+            error={(errors as Record<string, { message?: string }>)?.confirmPassword?.message}
+          />
+        </div>
       )}
 
+      {/* Error message */}
       {globalError && (
-        <p className="text-sm text-red-600" role="alert">
-          {globalError}
-        </p>
+        <div className="flex items-start gap-2 rounded-xl bg-red-50 p-3 text-sm text-red-600" role="alert">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>{globalError}</span>
+        </div>
       )}
 
+      {/* Rate limit warning */}
       {!rateLimit.canAttempt && (
-        <p className="text-xs text-[#6B7280]">
-          Trop de tentatives. Réessayez dans {rateLimit.retryAfterSeconds} secondes.
-        </p>
+        <div className="flex items-start gap-2 rounded-xl bg-amber-50 p-3 text-sm text-amber-700">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>Trop de tentatives. Réessayez dans {rateLimit.retryAfterSeconds} secondes.</span>
+        </div>
       )}
 
       <Button
         type="submit"
         isLoading={isSubmitting}
+        disabled={!rateLimit.canAttempt}
         className="mt-2 w-full"
+        size="lg"
       >
         {isLogin ? 'Se connecter' : "Créer mon compte"}
+        {!isSubmitting && <ArrowRight className="h-4 w-4" />}
       </Button>
+
+      {isLogin && (
+        <p className="text-center text-xs text-[#9CA3AF]">
+          Mot de passe oublié ?{' '}
+          <button type="button" className="text-[#2563EB] hover:underline">
+            Réinitialiser
+          </button>
+        </p>
+      )}
     </form>
   )
 }

@@ -126,13 +126,15 @@ export default function webhookRoutes(stripeInstance) {
 
           if (!existingPayment) {
             // Insérer le paiement
-            await supabase.from('payments').insert({
-              user_id: userId,
-              amount: paymentIntent.amount / 100,
-              currency: paymentIntent.currency,
-              status: paymentIntent.status,
-              stripe_payment_intent_id: paymentIntent.id,
-            })
+            await supabase
+              .from('payments')
+              .insert({
+                user_id: userId,
+                amount: typeof paymentIntent.amount === 'number' ? paymentIntent.amount : 0, // centimes
+                currency: paymentIntent.currency,
+                status: paymentIntent.status,
+                stripe_payment_intent_id: paymentIntent.id,
+              })
 
             // Mettre à jour les crédits
             const { data: profile } = await supabase
@@ -158,4 +160,3 @@ export default function webhookRoutes(stripeInstance) {
 
   return router
 }
-

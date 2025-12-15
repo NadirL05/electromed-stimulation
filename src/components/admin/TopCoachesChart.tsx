@@ -41,7 +41,7 @@ export default function TopCoachesChart({ data }: TopCoachesChartProps) {
             borderRadius: '8px',
             color: '#fff',
           }}
-          formatter={(value: number | string | undefined) => {
+          formatter={(value: number | undefined) => {
             const numericValue = typeof value === 'number' ? value : 0
             return [`${numericValue} séances`, 'Séances']
           }}

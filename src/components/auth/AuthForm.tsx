@@ -67,7 +67,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
         <Input
           label="Nom complet"
           {...register('fullName' as const)}
-          error={errors['fullName']?.message as string | undefined}
+          error={errors?.fullName?.message as string | undefined}
         />
       )}
       <Input
@@ -90,7 +90,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
           type="password"
           autoComplete="new-password"
           {...register('confirmPassword' as const)}
-          error={errors['confirmPassword']?.message as string | undefined}
+          error={errors?.confirmPassword?.message as string | undefined}
         />
       )}
 

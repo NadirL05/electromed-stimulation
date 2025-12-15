@@ -7,6 +7,7 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',    port: 4173,
     strictPort: true,
+    allowedHosts: ['.railway.app'],
   },
   server: {
     host: '0.0.0.0',

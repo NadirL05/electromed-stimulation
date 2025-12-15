@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
 interface CalendarProps {
   currentDate: Date
   selectedDate: Date | null
@@ -27,57 +29,84 @@ export function Calendar({ currentDate, selectedDate, onChangeMonth, onSelect }:
     return x < t
   }
 
+  const isToday = (d: Date) => {
+    return d.getDate() === today.getDate() && 
+           d.getMonth() === today.getMonth() && 
+           d.getFullYear() === today.getFullYear()
+  }
+
   const isSameDay = (a: Date, b: Date) =>
     a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-      <div className="mb-4 flex items-center justify-between text-sm text-white">
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <button
           onClick={() => onChangeMonth(-1)}
-          className="rounded-full border border-white/10 px-2 py-1 text-xs text-zinc-200 transition hover:border-white/30 hover:bg-white/5"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-zinc-400 transition hover:border-white/20 hover:bg-white/5 hover:text-white"
         >
-          Mois précédent
+          <ChevronLeft className="h-5 w-5" />
         </button>
-        <div className="font-semibold">
+        <h3 className="text-lg font-semibold capitalize text-white">
           {currentDate.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
-        </div>
+        </h3>
         <button
           onClick={() => onChangeMonth(1)}
-          className="rounded-full border border-white/10 px-2 py-1 text-xs text-zinc-200 transition hover:border-white/30 hover:bg-white/5"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-zinc-400 transition hover:border-white/20 hover:bg-white/5 hover:text-white"
         >
-          Mois suivant
+          <ChevronRight className="h-5 w-5" />
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-2 text-center text-xs text-zinc-400">
+      {/* Week days header */}
+      <div className="grid grid-cols-7 gap-1">
         {weekDays.map((d) => (
-          <div key={d} className="py-1">
+          <div key={d} className="py-2 text-center text-xs font-medium text-zinc-500">
             {d}
           </div>
         ))}
       </div>
-      <div className="mt-2 grid grid-cols-7 gap-2">
+
+      {/* Days grid */}
+      <div className="grid grid-cols-7 gap-1">
         {days.map((d, idx) =>
           d ? (
             <button
               key={idx}
               disabled={isPast(d)}
               onClick={() => onSelect(d)}
-              className={`h-10 rounded-lg border text-sm transition ${
+              className={`relative flex h-12 items-center justify-center rounded-xl text-sm font-medium transition-all ${
                 isPast(d)
-                  ? 'cursor-not-allowed border-white/5 text-zinc-500 opacity-50'
+                  ? 'cursor-not-allowed text-zinc-700'
                   : isSameDay(d, selectedDate ?? new Date(0))
-                    ? 'border-orange-500 bg-orange-500 text-zinc-900 shadow-orange-500/40'
-                    : 'border-white/10 text-white hover:border-orange-500/70 hover:bg-orange-500/10'
+                    ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30'
+                    : isToday(d)
+                      ? 'bg-zinc-800 text-white ring-2 ring-orange-500/50'
+                      : 'text-zinc-300 hover:bg-zinc-800'
               }`}
             >
               {d.getDate()}
+              {isToday(d) && !isSameDay(d, selectedDate ?? new Date(0)) && (
+                <span className="absolute bottom-1.5 h-1 w-1 rounded-full bg-orange-500" />
+              )}
             </button>
           ) : (
             <div key={idx} />
           ),
         )}
+      </div>
+
+      {/* Legend */}
+      <div className="flex items-center justify-center gap-6 pt-2 text-xs text-zinc-500">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded bg-orange-500" />
+          <span>Sélectionné</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded bg-zinc-800 ring-1 ring-orange-500/50" />
+          <span>Aujourd'hui</span>
+        </div>
       </div>
     </div>
   )

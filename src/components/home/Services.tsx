@@ -23,7 +23,7 @@ const services: Service[] = [
     icon: Dumbbell,
     title: 'Renforcement musculaire',
     description:
-      'Séances haute intensité guidées par un coach pour sculpter et tonifier l'ensemble du corps.',
+      "Séances haute intensité guidées par un coach pour sculpter et tonifier l'ensemble du corps.",
     color: 'from-[#10B981] to-[#34D399]',
     bgLight: 'bg-[#ECFDF5]',
   },

@@ -10,10 +10,10 @@ const plans = [
     name: 'Basic',
     price: '29€',
     period: '/mois',
-    description: 'Idéal pour découvrir l'EMS en douceur.',
+    description: "Idéal pour découvrir l'EMS en douceur.",
     sessions: '2 séances / mois',
     popular: false,
-    features: ['Accès à 2 séances EMS', 'Suivi de base', 'Accès à l'application membre', 'Support par email'],
+    features: ['Accès à 2 séances EMS', 'Suivi de base', "Accès à l'application membre", 'Support par email'],
   },
   {
     name: 'Premium',

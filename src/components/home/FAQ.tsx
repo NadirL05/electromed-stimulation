@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, HelpCircle } from 'lucide-react'
 
 const questions = [
   {
@@ -33,36 +33,57 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="mt-16 space-y-6">
-      <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-semibold text-[#111827]">Questions fréquentes</h2>
-        <p className="text-sm text-[#6B7280] sm:text-base">
+    <section className="mt-20 space-y-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="space-y-2 text-center"
+      >
+        <span className="inline-block rounded-full bg-[#F3F4F6] px-4 py-1.5 text-xs font-semibold text-[#4B5563]">
+          <HelpCircle className="mr-1 inline-block h-3.5 w-3.5" />
+          FAQ
+        </span>
+        <h2 className="text-2xl font-bold text-[#111827] sm:text-3xl">
+          Questions fréquentes
+        </h2>
+        <p className="mx-auto max-w-2xl text-sm text-[#6B7280] sm:text-base">
           Tout ce que vos futurs membres veulent savoir avant de réserver leur première séance.
         </p>
-      </div>
+      </motion.div>
 
       <div className="mx-auto max-w-3xl space-y-3">
         {questions.map((item, index) => {
           const isOpen = openIndex === index
           return (
-            <div
+            <motion.div
               key={item.q}
-              className="rounded-2xl bg-white p-4 shadow-sm shadow-black/5 ring-1 ring-gray-100"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              viewport={{ once: true }}
+              className={`overflow-hidden rounded-2xl transition-all duration-300 ${
+                isOpen 
+                  ? 'bg-gradient-to-br from-[#EFF6FF] to-white ring-2 ring-[#2563EB]/20' 
+                  : 'bg-white ring-1 ring-gray-100 hover:ring-gray-200'
+              }`}
             >
               <button
                 type="button"
-                className="flex w-full items-center justify-between gap-4 text-left"
+                className="flex w-full items-center justify-between gap-4 p-5 text-left"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 aria-expanded={isOpen}
               >
-                <span className="text-sm font-medium text-[#111827] sm:text-base">
+                <span className={`text-sm font-semibold sm:text-base ${isOpen ? 'text-[#2563EB]' : 'text-[#111827]'}`}>
                   {item.q}
                 </span>
-                <ChevronDown
-                  className={`h-4 w-4 shrink-0 text-[#6B7280] transition-transform ${
-                    isOpen ? 'rotate-180' : ''
-                  }`}
-                />
+                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                  isOpen ? 'bg-[#2563EB] text-white' : 'bg-gray-100 text-[#6B7280]'
+                }`}>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                  />
+                </span>
               </button>
               <AnimatePresence initial={false}>
                 {isOpen && (
@@ -70,13 +91,13 @@ export default function FAQ() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <p className="mt-3 text-sm text-[#4B5563]">{item.a}</p>
+                    <p className="px-5 pb-5 text-sm leading-relaxed text-[#4B5563]">{item.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           )
         })}
       </div>

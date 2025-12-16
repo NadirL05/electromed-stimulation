@@ -91,6 +91,28 @@ npm run build
 # Le backend utilise le fichier server.js tel quel
 ```
 
+## 🚂 Déploiement sur Railway
+
+ElectroMed est prêt pour être déployé sur Railway avec **2 services** :
+
+### Déploiement Rapide
+
+1. **Backend** : Déployez d'abord le dossier `/backend`
+2. **Frontend** : Déployez ensuite la racine `/`
+3. **Connectez** : Configurez les variables d'environnement pour connecter les deux
+
+### Guides Complets
+
+📖 **Guide détaillé** : Consultez [`docs/RAILWAY_DEPLOYMENT.md`](docs/RAILWAY_DEPLOYMENT.md)
+🔐 **Variables d'env** : Voir [`docs/RAILWAY_ENV_VARS.md`](docs/RAILWAY_ENV_VARS.md)
+
+### Configuration Automatique
+
+Les fichiers `railway.json` sont déjà configurés :
+- ✅ Frontend : Build automatique avec Vite
+- ✅ Backend : Démarrage avec Express
+- ✅ Health checks configurés
+
 ## 📁 Structure du Projet
 ```
 src/

@@ -5,8 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   preview: {
-    host: '0.0.0.0',    port: 4173,
-    strictPort: true,
+    host: '0.0.0.0',    port: Number(process.env.PORT) || 4173,    strictPort: true,
     allowedHosts: ['.railway.app'],
     headers: {
       'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co",

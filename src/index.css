@@ -18,8 +18,8 @@ body {
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
   line-height: 1.5;
-  background-color: #18181b; /* zinc-900 */
-  color: #ffffff; /* white */
+  background-color: #F9FAFB; /* gray-50 - fond clair */
+  color: #111827; /* gray-900 - texte sombre */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -8,9 +8,14 @@ export default defineConfig({
     host: '0.0.0.0',
     port: Number(process.env.PORT) || 4173,
     strictPort: true,
+    allowedHosts: [
+      '.railway.app',
+      '.up.railway.app',
+      'localhost',
+    ],
   },
   server: {
-    host: true, // Écoute sur toutes les interfaces réseau
+    host: true,
     port: 5173,
     strictPort: false,
     hmr: {

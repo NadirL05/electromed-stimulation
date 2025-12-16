@@ -54,9 +54,13 @@ export default function Navbar() {
                   }`
                 }
               >
-                {item.label}
-                {(isActive || location.pathname === item.to) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {(isActive || location.pathname === item.to) && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
+                    )}
+                  </>
                 )}
               </NavLink>
             ))}

@@ -12,30 +12,31 @@ export default function Dashboard() {
   return (
     <div className="space-y-8">
       {/* Welcome banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 p-6 text-white shadow-xl shadow-orange-500/20 sm:p-8">
-        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-        
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 p-6 text-white shadow-2xl shadow-orange-500/30 sm:p-8">
+        <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-pink-400/30 to-purple-500/30 blur-3xl" />
+        <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr from-orange-400/30 to-yellow-400/30 blur-2xl" />
+        <div className="absolute right-1/3 top-1/2 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
+
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-medium text-orange-100">
+            <p className="text-sm font-medium text-white/80">
               Bienvenue, {user?.full_name?.split(' ')[0] || 'membre'} 👋
             </p>
             <h2 className="text-2xl font-bold sm:text-3xl">
               Prêt pour votre prochaine séance ?
             </h2>
-            <p className="max-w-md text-sm text-orange-100">
-              Vous avez <span className="font-semibold text-white">{credits} crédits</span> disponibles. 
+            <p className="max-w-md text-sm text-white/90">
+              Vous avez <span className="font-bold text-white">{credits} crédits</span> disponibles.
               Réservez maintenant votre prochaine séance EMS.
             </p>
           </div>
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            className="w-full bg-white text-orange-600 shadow-lg hover:bg-orange-50 sm:w-auto"
+          <Button
+            variant="secondary"
+            size="lg"
+            className="group w-full bg-white/95 text-purple-700 shadow-xl shadow-purple-900/20 backdrop-blur-sm hover:bg-white hover:shadow-2xl hover:shadow-purple-900/30 sm:w-auto"
             onClick={() => navigate('/dashboard/booking')}
           >
-            <CalendarClock className="h-5 w-5" />
+            <CalendarClock className="h-5 w-5 transition-transform group-hover:scale-110" />
             Réserver
           </Button>
         </div>
@@ -77,60 +78,65 @@ export default function Dashboard() {
 
       {/* Quick actions */}
       <div className="grid gap-4 sm:grid-cols-3">
-        <button 
+        <button
           onClick={() => navigate('/dashboard/booking')}
-          className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-zinc-800/50 p-5 text-left transition-all hover:border-orange-500/20 hover:bg-zinc-800"
+          className="group relative overflow-hidden flex items-center gap-4 rounded-2xl border border-white/5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 p-5 text-left backdrop-blur-sm transition-all hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/10"
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition-transform group-hover:scale-110">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 text-white shadow-lg shadow-orange-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-500/40">
             <CalendarClock className="h-6 w-6" />
           </div>
           <div className="flex-1">
             <p className="font-semibold text-white">Réserver une séance</p>
-            <p className="text-xs text-zinc-500">Choisissez votre créneau</p>
+            <p className="text-xs text-zinc-400">Choisissez votre créneau</p>
           </div>
-          <ArrowRight className="h-5 w-5 text-zinc-600 transition-transform group-hover:translate-x-1 group-hover:text-orange-400" />
+          <ArrowRight className="h-5 w-5 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-orange-400" />
         </button>
 
-        <button 
+        <button
           onClick={() => navigate('/dashboard/coaches')}
-          className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-zinc-800/50 p-5 text-left transition-all hover:border-blue-500/20 hover:bg-zinc-800"
+          className="group relative overflow-hidden flex items-center gap-4 rounded-2xl border border-white/5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 p-5 text-left backdrop-blur-sm transition-all hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10"
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 transition-transform group-hover:scale-110">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-500/40">
             <Users className="h-6 w-6" />
           </div>
           <div className="flex-1">
             <p className="font-semibold text-white">Voir les coachs</p>
-            <p className="text-xs text-zinc-500">Nos experts EMS</p>
+            <p className="text-xs text-zinc-400">Nos experts EMS</p>
           </div>
-          <ArrowRight className="h-5 w-5 text-zinc-600 transition-transform group-hover:translate-x-1 group-hover:text-blue-400" />
+          <ArrowRight className="h-5 w-5 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-blue-400" />
         </button>
 
-        <button 
+        <button
           onClick={() => navigate('/dashboard/credits')}
-          className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-zinc-800/50 p-5 text-left transition-all hover:border-emerald-500/20 hover:bg-zinc-800"
+          className="group relative overflow-hidden flex items-center gap-4 rounded-2xl border border-white/5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 p-5 text-left backdrop-blur-sm transition-all hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10"
         >
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 transition-transform group-hover:scale-110">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-500/40">
             <CreditCard className="h-6 w-6" />
           </div>
           <div className="flex-1">
             <p className="font-semibold text-white">Acheter des crédits</p>
-            <p className="text-xs text-zinc-500">Packs avantageux</p>
+            <p className="text-xs text-zinc-400">Packs avantageux</p>
           </div>
-          <ArrowRight className="h-5 w-5 text-zinc-600 transition-transform group-hover:translate-x-1 group-hover:text-emerald-400" />
+          <ArrowRight className="h-5 w-5 text-zinc-600 transition-all group-hover:translate-x-1 group-hover:text-emerald-400" />
         </button>
       </div>
 
       {/* Recent activity & notifications */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent sessions */}
-        <div className="rounded-2xl border border-white/5 bg-zinc-800/50 p-6">
-          <div className="mb-4 flex items-center justify-between">
+        <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 p-6 shadow-lg backdrop-blur-sm">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-orange-500/10 to-pink-500/10 blur-3xl" />
+          <div className="relative mb-4 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-white">Séances récentes</h3>
-            <button 
+            <button
               onClick={() => navigate('/dashboard/sessions')}
-              className="text-sm text-orange-400 transition hover:text-orange-300"
+              className="group flex items-center gap-1 text-sm font-medium text-orange-400 transition hover:text-orange-300"
             >
-              Tout voir →
+              Tout voir
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
           <div className="space-y-3">
@@ -166,10 +172,11 @@ export default function Dashboard() {
         </div>
 
         {/* Notifications */}
-        <div className="rounded-2xl border border-white/5 bg-zinc-800/50 p-6">
-          <div className="mb-4 flex items-center justify-between">
+        <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 p-6 shadow-lg backdrop-blur-sm">
+          <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-3xl" />
+          <div className="relative mb-4 flex items-center justify-between">
             <h3 className="text-lg font-semibold text-white">Notifications</h3>
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-pink-500 text-xs font-bold text-white shadow-lg shadow-orange-500/30">
               2
             </span>
           </div>

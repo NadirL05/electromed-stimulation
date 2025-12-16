@@ -26,33 +26,42 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky inset-x-0 top-0 z-40 border-b border-white/10 bg-white/70 backdrop-blur-xl">
+      <header className="sticky inset-x-0 top-0 z-40 border-b border-white/20 bg-white/80 shadow-sm backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-semibold text-[#1F2937]"
+            className="group flex items-center gap-2.5 text-lg font-bold"
             onClick={closeMenus}
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-[#2563EB] via-[#10B981] to-[#F97316] text-white shadow-md">
-              <Zap className="h-4 w-4" />
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-500/40">
+              <Zap className="h-5 w-5" />
             </span>
-            <span>ElectroMed</span>
+            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+              ElectroMed
+            </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium text-[#4B5563] md:flex">
+          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `transition hover:text-[#111827] ${
+                  `relative transition-colors ${
                     isActive || location.pathname === item.to
-                      ? 'text-[#2563EB]'
-                      : 'text-[#4B5563]'
+                      ? 'text-transparent bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text font-semibold'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`
                 }
               >
-                {item.label}
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {(isActive || location.pathname === item.to) && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
+                    )}
+                  </>
+                )}
               </NavLink>
             ))}
           </nav>

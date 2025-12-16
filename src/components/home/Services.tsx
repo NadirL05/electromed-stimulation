@@ -10,40 +10,39 @@ interface Service {
   bgLight: string
 }
 
-const services: Service[] = [
+const SERVICES = [
   {
-    icon: Scale,
-    title: 'Perte de poids',
-    description:
-      "Programmes EMS ciblés pour accélérer la perte de masse grasse tout en préservant la masse musculaire.",
-    color: 'from-[#2563EB] to-[#60A5FA]',
-    bgLight: 'bg-[#EFF6FF]',
+    id: "slimming",
+    title: "Affinement et tonification",
+    description: `Programme ciblé pour affiner la silhouette et tonifier les zones clés grâce à l'EMS.`,
+    highlights: [
+      "Travail profond des muscles",
+      "Séances courtes et efficaces",
+      "Résultats visibles en quelques semaines",
+    ],
   },
   {
-    icon: Dumbbell,
-    title: 'Renforcement musculaire',
-    description:
-      "Séances haute intensité guidées par un coach pour sculpter et tonifier l'ensemble du corps.",
-    color: 'from-[#10B981] to-[#34D399]',
-    bgLight: 'bg-[#ECFDF5]',
+    id: "recovery",
+    title: "Récupération et bien-être",
+    description: `Séances dédiées à la récupération musculaire et à la détente après l'effort.`,
+    highlights: [
+      "Diminution des tensions musculaires",
+      "Amélioration de la circulation",
+      "Sensation de légèreté et de relaxation",
+    ],
   },
   {
-    icon: Activity,
-    title: 'Récupération sportive',
-    description:
-      'Protocoles spécifiques pour réduire les courbatures, améliorer la circulation et optimiser la récupération.',
-    color: 'from-[#F97316] to-[#FDBA74]',
-    bgLight: 'bg-[#FFF7ED]',
+    id: "performance",
+    title: "Performance sportive",
+    description: `Accompagnement pour développer ta force, ton explosivité et ta résistance à l'effort.`,
+    highlights: [
+      "Renforcement des groupes musculaires clés",
+      "Complément idéal à l'entraînement classique",
+      "Optimisation de la performance globale",
+    ],
   },
-  {
-    icon: Heart,
-    title: 'Bien-être & posture',
-    description:
-      'Séances douces pour soulager les douleurs chroniques, améliorer la posture et relâcher les tensions.',
-    color: 'from-[#EC4899] to-[#F472B6]',
-    bgLight: 'bg-[#FDF2F8]',
-  },
-]
+];
+
 
 export default function Services() {
   return (

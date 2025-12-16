@@ -182,7 +182,7 @@ export default function Coaches() {
               <div className="absolute right-4 top-4">
                 <div className="flex items-center gap-2">
                   <span className={`h-2 w-2 rounded-full ${status.color} animate-pulse`} />
-                  <Badge variant={status.variant} className="text-xs">{status.label}</Badge>
+                  <Badge variant={status.variant}>{status.label}</Badge>
                 </div>
               </div>
 

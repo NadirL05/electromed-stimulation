@@ -4,8 +4,37 @@ import { AuthModal } from './components/auth/AuthModal'
 import { Button } from './components/ui/Button'
 
 function App() {
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/0c2a2f4b-375e-479e-93de-de2d6a507319',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:7',message:'App function entry',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+  // #endregion
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
-  const { user, isAuthenticated, logout } = useAuthStore()
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/0c2a2f4b-375e-479e-93de-de2d6a507319',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:10',message:'Before useAuthStore',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+  // #endregion
+  let user, isAuthenticated, logout
+  try {
+    const store = useAuthStore()
+    user = store.user
+    isAuthenticated = store.isAuthenticated
+    logout = store.logout
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0c2a2f4b-375e-479e-93de-de2d6a507319',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:18',message:'After useAuthStore',data:{isAuthenticated,hasUser:!!user},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+  } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7243/ingest/0c2a2f4b-375e-479e-93de-de2d6a507319',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:21',message:'useAuthStore error',data:{error:error instanceof Error ? error.message : String(error)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+    // #endregion
+    user = null
+    isAuthenticated = false
+    logout = () => {}
+  }
+
+  // Note: fetchUser est déjà appelé dans useAuthInit via AuthProvider
+
+  console.log('App rendered', { isAuthenticated, user })
+  // #region agent log
+  fetch('http://127.0.0.1:7243/ingest/0c2a2f4b-375e-479e-93de-de2d6a507319',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.tsx:32',message:'App before return',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+  // #endregion
 
   return (
     <div className="min-h-screen bg-zinc-900 text-white">

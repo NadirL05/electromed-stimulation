@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Home, CalendarDays, Users, User, Settings, X, CalendarClock, CreditCard, Zap, LayoutDashboard, LogOut, ChevronRight } from 'lucide-react'
+import { CalendarDays, Users, User, Settings, X, CalendarClock, CreditCard, Zap, LayoutDashboard, LogOut, ChevronRight } from 'lucide-react'
 import { useAuthStore } from '../../stores/authStore'
 
 const mainNavItems = [

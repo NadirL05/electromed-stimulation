@@ -75,7 +75,7 @@ export default function AddCoachModal({
       const tempPassword = `Coach${Math.random().toString(36).slice(-12)}!`
 
       // Appeler l'Edge Function pour créer l'utilisateur coach
-      await createCoachUser({
+      const result = await createCoachUser({
         email: data.email,
         password: tempPassword,
         full_name: data.full_name,

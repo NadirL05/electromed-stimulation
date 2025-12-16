@@ -67,7 +67,7 @@ export default function AdminDashboard() {
         const monthlyMap = new Map<string, { revenue: number; sessions: number }>()
 
         payments?.forEach((payment) => {
-          const monthKey = new Date(payment.created_at || Date.now()).toISOString().slice(0, 7)
+          const monthKey = new Date(payment.created_at).toISOString().slice(0, 7)
           const current = monthlyMap.get(monthKey) || { revenue: 0, sessions: 0 }
           monthlyMap.set(monthKey, { ...current, revenue: current.revenue + payment.amount })
         })

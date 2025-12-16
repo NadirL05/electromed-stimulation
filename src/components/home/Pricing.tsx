@@ -7,45 +7,49 @@ import { useNavigate } from 'react-router-dom'
 
 const plans = [
   {
-    name: 'Basic',
-    price: '29€',
-    period: '/mois',
-    description: "Idéal pour découvrir l'EMS en douceur.",
-    sessions: '2 séances / mois',
+    name: "Basic",
+    price: "29€",
+    period: "/mois",
+    description: `Idéal pour découvrir l'EMS en douceur.`,
+    sessions: "2 séances / mois",
     popular: false,
-    features: ['Accès à 2 séances EMS', 'Suivi de base', "Accès à l'application membre", 'Support par email'],
+    features: [
+      "Accès à 2 séances EMS",
+      "Suivi de base",
+      "Accès à l'application membre",
+      "Support par email",
+    ],
   },
   {
-    name: 'Premium',
-    price: '59€',
-    period: '/mois',
-    description: 'Le meilleur équilibre résultats / budget.',
-    sessions: '4 séances / mois',
+    name: "Premium",
+    price: "59€",
+    period: "/mois",
+    description: `Le meilleur équilibre résultats / budget.`,
+    sessions: "4 séances / mois",
     popular: true,
     features: [
-      '4 séances EMS / mois',
-      'Suivi personnalisé',
-      'Accès prioritaire aux créneaux',
-      'Rapports de progression détaillés',
-      'Support prioritaire',
+      "4 séances EMS / mois",
+      "Suivi personnalisé",
+      "Accès prioritaire aux créneaux",
+      "Rapports de progression détaillés",
     ],
   },
   {
-    name: 'Elite',
-    price: '99€',
-    period: '/mois',
-    description: 'Pour un accompagnement intensif et premium.',
-    sessions: 'Séances illimitées',
+    name: "Elite",
+    price: "99€",
+    period: "/mois",
+    description: `Programme intensif pour des résultats rapides et durables.`,
+    sessions: "8 séances / mois",
     popular: false,
     features: [
-      'Séances illimitées',
-      'Coach dédié',
-      'Programme sur-mesure',
-      'Support prioritaire 24/7',
-      'Analyses avancées',
+      "8 séances EMS / mois",
+      "Coaching avancé",
+      "Plan d'entraînement sur mesure",
+      "Suivi hebdomadaire avec ton coach",
     ],
   },
-]
+];
+
 
 export default function PricingSection() {
   const { openSignup } = useAuthModals()

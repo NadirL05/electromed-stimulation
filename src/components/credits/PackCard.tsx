@@ -67,7 +67,7 @@ export function PackCard({ pack, onBuy, isLoading }: PackCardProps) {
     >
       {/* Popular badge */}
       {pack.popular && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+        <div className="absolute -top-3 left-1/2 w-fit -translate-x-1/2 rounded-full shadow-lg">
           <Badge variant="warning">
             <Sparkles className="mr-1 h-3 w-3" />
             Le plus populaire
@@ -118,4 +118,6 @@ export function PackCard({ pack, onBuy, isLoading }: PackCardProps) {
     </div>
   )
 }
+
+
 

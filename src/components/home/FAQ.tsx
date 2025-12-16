@@ -34,20 +34,25 @@ export default function FAQ() {
 
   return (
     <section className="mt-20 space-y-8">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="space-y-2 text-center"
+        className="space-y-3 text-center"
       >
-        <span className="inline-block rounded-full bg-[#F3F4F6] px-4 py-1.5 text-xs font-semibold text-[#4B5563]">
-          <HelpCircle className="mr-1 inline-block h-3.5 w-3.5" />
+        <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-100 via-fuchsia-100 to-pink-100 px-4 py-2 text-xs font-semibold text-purple-600 ring-1 ring-purple-200/50">
+          <HelpCircle className="h-3.5 w-3.5" />
           FAQ
         </span>
-        <h2 className="text-2xl font-bold text-[#111827] sm:text-3xl">
-          Questions fréquentes
+        <h2 className="text-3xl font-bold sm:text-4xl">
+          <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+            Questions
+          </span>{' '}
+          <span className="bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 bg-clip-text text-transparent">
+            fréquentes
+          </span>
         </h2>
-        <p className="mx-auto max-w-2xl text-sm text-[#6B7280] sm:text-base">
+        <p className="mx-auto max-w-2xl text-base text-gray-600">
           Tout ce que vos futurs membres veulent savoir avant de réserver leur première séance.
         </p>
       </motion.div>
@@ -62,23 +67,34 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className={`overflow-hidden rounded-2xl transition-all duration-300 ${
-                isOpen 
-                  ? 'bg-gradient-to-br from-[#EFF6FF] to-white ring-2 ring-[#2563EB]/20' 
-                  : 'bg-white ring-1 ring-gray-100 hover:ring-gray-200'
+              className={`group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 ${
+                isOpen
+                  ? 'bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 ring-2 ring-purple-500/30 shadow-xl shadow-purple-500/20'
+                  : 'bg-white ring-1 ring-gray-100 hover:shadow-xl hover:ring-gray-200'
               }`}
             >
+              {/* Animated background gradient on hover */}
+              {!isOpen && (
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-fuchsia-500/5 to-pink-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              )}
+
               <button
                 type="button"
-                className="flex w-full items-center justify-between gap-4 p-5 text-left"
+                className="relative flex w-full items-center justify-between gap-4 p-5 text-left"
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 aria-expanded={isOpen}
               >
-                <span className={`text-sm font-semibold sm:text-base ${isOpen ? 'text-[#2563EB]' : 'text-[#111827]'}`}>
+                <span className={`text-sm font-bold sm:text-base ${
+                  isOpen
+                    ? 'bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 bg-clip-text text-transparent'
+                    : 'text-gray-900'
+                }`}>
                   {item.q}
                 </span>
-                <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
-                  isOpen ? 'bg-[#2563EB] text-white' : 'bg-gray-100 text-[#6B7280]'
+                <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                  isOpen
+                    ? 'bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-600 text-white shadow-lg shadow-purple-500/30'
+                    : 'bg-gray-100 text-gray-600 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500 group-hover:text-white'
                 }`}>
                   <ChevronDown
                     className={`h-4 w-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
@@ -93,7 +109,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="px-5 pb-5 text-sm leading-relaxed text-[#4B5563]">{item.a}</p>
+                    <p className="relative px-5 pb-5 text-sm leading-relaxed text-gray-700">{item.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

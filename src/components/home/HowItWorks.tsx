@@ -39,27 +39,34 @@ const steps: Step[] = [
 export default function HowItWorks() {
   return (
     <section className="mt-20 space-y-8">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="space-y-2 text-center"
+        className="space-y-3 text-center"
       >
-        <span className="inline-block rounded-full bg-[#EFF6FF] px-4 py-1.5 text-xs font-semibold text-[#2563EB]">
+        <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-100 via-cyan-100 to-sky-100 px-4 py-2 text-xs font-semibold text-blue-600 ring-1 ring-blue-200/50">
           Comment ça marche
         </span>
-        <h2 className="text-2xl font-bold text-[#111827] sm:text-3xl">
-          4 étapes pour transformer votre franchise
+        <h2 className="text-3xl font-bold sm:text-4xl">
+          <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+            4 étapes pour transformer
+          </span>
+          <br />
+          <span className="bg-gradient-to-r from-blue-500 via-cyan-500 to-sky-600 bg-clip-text text-transparent">
+            votre franchise
+          </span>
         </h2>
-        <p className="mx-auto max-w-2xl text-sm text-[#6B7280] sm:text-base">
+        <p className="mx-auto max-w-2xl text-base text-gray-600">
           Une plateforme pensée pour les franchises EMS, du premier rendez-vous à la fidélisation.
         </p>
       </motion.div>
 
       <div className="relative grid gap-6 md:grid-cols-4">
         {/* Connecting line (desktop only) */}
-        <div className="absolute left-0 right-0 top-10 hidden h-0.5 bg-gradient-to-r from-[#2563EB] via-[#10B981] to-[#F97316] md:block" />
-        
+        <div className="absolute left-0 right-0 top-10 hidden h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-600 opacity-20 blur-sm md:block" />
+        <div className="absolute left-0 right-0 top-10 hidden h-0.5 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-600 md:block" />
+
         {steps.map((step, index) => {
           const Icon = step.icon
           return (
@@ -73,18 +80,29 @@ export default function HowItWorks() {
             >
               {/* Step number with gradient */}
               <div className="relative z-10 mb-4 flex justify-center md:justify-start">
-                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${step.color} text-lg font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${step.color} text-xl font-bold text-white shadow-xl transition-all duration-300 group-hover:shadow-2xl`}
+                >
                   {index + 1}
-                </div>
+                </motion.div>
               </div>
-              
+
               {/* Card */}
-              <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:shadow-lg hover:ring-gray-200">
-                <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} bg-opacity-10`}>
-                  <Icon className={`h-5 w-5 bg-gradient-to-br ${step.color} bg-clip-text text-transparent`} style={{ color: step.color.includes('2563EB') ? '#2563EB' : step.color.includes('10B981') ? '#10B981' : step.color.includes('F97316') ? '#F97316' : '#8B5CF6' }} />
+              <div className="relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-transparent">
+                {/* Animated background gradient on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 transition-opacity duration-500 group-hover:opacity-5`} />
+                <div className={`absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${step.color} opacity-0 blur-2xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-20`} />
+
+                <div className="relative">
+                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-6`}>
+                    <Icon className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="mb-2 text-base font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{step.description}</p>
                 </div>
-                <h3 className="mb-2 text-base font-semibold text-[#111827]">{step.title}</h3>
-                <p className="text-sm text-[#6B7280] leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           )

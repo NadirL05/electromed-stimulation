@@ -57,7 +57,7 @@ export default function Credits() {
       } else {
         setError(responseError || 'Erreur lors de la création de la session de paiement')
       }
-    } catch (err) {
+    } catch {
       setError('Impossible de contacter le serveur de paiement')
     } finally {
       setLoadingPack(null)

@@ -36,7 +36,7 @@ export default function RevenueChart({ data }: RevenueChartProps) {
             borderRadius: '8px',
             color: '#fff',
           }}
-          formatter={(value?: number, name?: string) => {
+          formatter={(value: number | undefined, name: string) => {
             const numericValue = typeof value === 'number' ? value : 0
             if (name === 'revenue') {
               return [`${numericValue.toFixed(2)} €`, 'Revenus']

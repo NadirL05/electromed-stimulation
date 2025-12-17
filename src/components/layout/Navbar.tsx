@@ -1,15 +1,24 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Zap, Menu, X } from 'lucide-react'
+import { Zap, Menu, X, Search, ChevronDown } from 'lucide-react'
 import { Button } from '../ui/Button'
 import LoginModal from '../auth/LoginModal'
 import SignupModal from '../auth/SignupModal'
 
 const navItems = [
-  { label: 'Accueil', to: '/' },
-  { label: 'Services', to: '/services' },
+  { label: 'Trouver un studio', to: '/studios' },
   { label: 'Tarifs', to: '/pricing' },
-  { label: 'Contact', to: '/contact' },
+  {
+    label: 'Nos programmes',
+    to: '/services',
+    hasDropdown: true,
+  },
+  { label: 'Résultats', to: '/results' },
+  {
+    label: 'Conseils & Coaching',
+    to: '/coaching',
+    hasDropdown: true,
+  },
 ]
 
 export default function Navbar() {
@@ -24,100 +33,108 @@ export default function Navbar() {
     setIsSignupOpen(false)
   }
 
+  const isActive = (path: string) => location.pathname === path
+
   return (
     <>
-      <header className="sticky inset-x-0 top-0 z-40 border-b border-white/20 bg-white/80 shadow-sm backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+      <header className="sticky inset-x-0 top-0 z-40 bg-white shadow-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
+          {/* Logo */}
           <Link
             to="/"
-            className="group flex items-center gap-2.5 text-lg font-bold"
+            className="group flex items-center gap-2.5"
             onClick={closeMenus}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-500/40">
-              <Zap className="h-5 w-5" />
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/30 transition-all group-hover:scale-105">
+              <Zap className="h-6 w-6" />
             </span>
-            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              ElectroMed
+            <span className="text-xl font-bold text-gray-900">
+              Electro<span className="text-orange-500">Med</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={({ isActive }) =>
-                  `relative transition-colors ${
-                    isActive || location.pathname === item.to
-                      ? 'text-transparent bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text font-semibold'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`
-                }
+                className={`group flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                  isActive(item.to)
+                    ? 'text-orange-500'
+                    : 'text-gray-700 hover:text-orange-500'
+                }`}
               >
-                {({ isActive }) => (
-                  <>
-                    {item.label}
-                    {(isActive || location.pathname === item.to) && (
-                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
-                    )}
-                  </>
+                {item.label}
+                {item.hasDropdown && (
+                  <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
                 )}
               </NavLink>
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 md:flex">
+          {/* Right Actions */}
+          <div className="hidden items-center gap-3 lg:flex">
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
+              aria-label="Rechercher"
+            >
+              <Search className="h-5 w-5" />
+            </button>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsLoginOpen(true)}
+              className="text-gray-700 hover:text-gray-900"
             >
               Connexion
             </Button>
             <Button
               variant="primary"
-              size="sm"
+              size="md"
               onClick={() => setIsSignupOpen(true)}
+              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 rounded-lg shadow-md shadow-orange-500/30 hover:shadow-lg hover:shadow-orange-500/40 transition-all"
             >
-              Essayer gratuitement
+              S'INSCRIRE
             </Button>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-xl p-2 text-[#4B5563] hover:bg-white/60 hover:text-[#111827] md:hidden"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label="Ouvrir le menu de navigation"
           >
-            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isMobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
+        {/* Mobile Navigation */}
         {isMobileOpen && (
-          <div className="border-t border-white/10 bg-white/80 px-4 py-3 shadow-md md:hidden">
-            <nav className="flex flex-col gap-2 text-sm font-medium">
+          <div className="border-t border-gray-100 bg-white px-4 py-4 shadow-lg lg:hidden">
+            <nav className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
-                  className={({ isActive }) =>
-                    `rounded-lg px-2 py-2 transition ${
-                      isActive || location.pathname === item.to
-                        ? 'bg-[#2563EB]/10 text-[#2563EB]'
-                        : 'text-[#4B5563] hover:bg-white'
-                    }`
-                  }
+                  className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive(item.to)
+                      ? 'bg-orange-50 text-orange-500'
+                      : 'text-gray-700 hover:bg-gray-50'
+                  }`}
                   onClick={() => setIsMobileOpen(false)}
                 >
                   {item.label}
+                  {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
                 </NavLink>
               ))}
             </nav>
-            <div className="mt-3 flex flex-col gap-2">
+            <div className="mt-4 flex flex-col gap-2 border-t border-gray-100 pt-4">
               <Button
                 variant="ghost"
-                size="sm"
-                className="w-full"
+                size="md"
+                className="w-full justify-center"
                 onClick={() => {
                   setIsLoginOpen(true)
                   setIsMobileOpen(false)
@@ -127,14 +144,14 @@ export default function Navbar() {
               </Button>
               <Button
                 variant="primary"
-                size="sm"
-                className="w-full"
+                size="md"
+                className="w-full justify-center bg-orange-500 hover:bg-orange-600"
                 onClick={() => {
                   setIsSignupOpen(true)
                   setIsMobileOpen(false)
                 }}
               >
-                Essayer gratuitement
+                S'INSCRIRE
               </Button>
             </div>
           </div>
@@ -146,4 +163,3 @@ export default function Navbar() {
     </>
   )
 }
-

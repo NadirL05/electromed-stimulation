@@ -3,15 +3,9 @@ import { Instagram, Linkedin, Facebook, Zap, Mail, Phone, MapPin } from 'lucide-
 
 const footerLinks = {
   product: [
-    { label: 'Trouver un studio', to: '/studios' },
-    { label: 'Nos programmes', to: '/services' },
+    { label: 'Accueil', to: '/' },
+    { label: 'Services', to: '/services' },
     { label: 'Tarifs', to: '/pricing' },
-    { label: 'Résultats', to: '/results' },
-  ],
-  company: [
-    { label: 'À propos', to: '/about' },
-    { label: 'Carrières', to: '/careers' },
-    { label: 'Presse', to: '/press' },
     { label: 'Contact', to: '/contact' },
   ],
   legal: [
@@ -30,10 +24,10 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="mt-auto bg-gray-900 text-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2.5">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg">
                 <Zap className="h-6 w-6" />
@@ -43,11 +37,12 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
-              La plateforme de référence pour l'électrostimulation médicale. Transformez votre corps en seulement 20 minutes par séance.
+              Transformez votre corps en 20 minutes grâce à l'électrostimulation.
+              Résultats visibles en 8 séances avec nos coachs certifiés.
             </p>
 
             {/* Contact Info */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               <a href="mailto:contact@electromed.fr" className="flex items-center gap-2 text-sm text-gray-400 hover:text-orange-500 transition-colors">
                 <Mail className="h-4 w-4" />
                 contact@electromed.fr
@@ -63,28 +58,11 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nos Services */}
+          {/* Navigation */}
           <div>
-            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Nos Services</h4>
-            <ul className="space-y-3">
+            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Navigation</h4>
+            <ul className="space-y-2">
               {footerLinks.product.map((link) => (
-                <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="text-sm text-gray-400 transition hover:text-orange-500"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Entreprise */}
-          <div>
-            <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Entreprise</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
@@ -100,7 +78,7 @@ export default function Footer() {
           {/* Légal */}
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Légal</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.to}>
                   <a
@@ -116,8 +94,8 @@ export default function Footer() {
         </div>
 
         {/* Social & Bottom */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-gray-800 pt-8 lg:flex-row">
-          <div className="flex items-center gap-4">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-8 sm:flex-row">
+          <div className="flex items-center gap-3">
             {socialLinks.map(({ icon: Icon, label, href }) => (
               <a
                 key={label}

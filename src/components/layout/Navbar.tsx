@@ -1,24 +1,15 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Zap, Menu, X, Search, ChevronDown } from 'lucide-react'
+import { Zap, Menu, X } from 'lucide-react'
 import { Button } from '../ui/Button'
 import LoginModal from '../auth/LoginModal'
 import SignupModal from '../auth/SignupModal'
 
 const navItems = [
-  { label: 'Trouver un studio', to: '/studios' },
+  { label: 'Accueil', to: '/' },
+  { label: 'Services', to: '/services' },
   { label: 'Tarifs', to: '/pricing' },
-  {
-    label: 'Nos programmes',
-    to: '/services',
-    hasDropdown: true,
-  },
-  { label: 'Résultats', to: '/results' },
-  {
-    label: 'Conseils & Coaching',
-    to: '/coaching',
-    hasDropdown: true,
-  },
+  { label: 'Contact', to: '/contact' },
 ]
 
 export default function Navbar() {
@@ -54,33 +45,24 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                className={`group flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   isActive(item.to)
                     ? 'text-orange-500'
                     : 'text-gray-700 hover:text-orange-500'
                 }`}
               >
                 {item.label}
-                {item.hasDropdown && (
-                  <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
-                )}
               </NavLink>
             ))}
           </nav>
 
           {/* Right Actions */}
-          <div className="hidden items-center gap-3 lg:flex">
-            <button
-              className="flex h-10 w-10 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-              aria-label="Rechercher"
-            >
-              <Search className="h-5 w-5" />
-            </button>
+          <div className="hidden items-center gap-3 md:flex">
             <Button
               variant="ghost"
               size="sm"
@@ -102,7 +84,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 md:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label="Ouvrir le menu de navigation"
           >
@@ -112,13 +94,13 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isMobileOpen && (
-          <div className="border-t border-gray-100 bg-white px-4 py-4 shadow-lg lg:hidden">
+          <div className="border-t border-gray-100 bg-white px-4 py-4 shadow-lg md:hidden">
             <nav className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
-                  className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                  className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                     isActive(item.to)
                       ? 'bg-orange-50 text-orange-500'
                       : 'text-gray-700 hover:bg-gray-50'
@@ -126,7 +108,6 @@ export default function Navbar() {
                   onClick={() => setIsMobileOpen(false)}
                 >
                   {item.label}
-                  {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
                 </NavLink>
               ))}
             </nav>

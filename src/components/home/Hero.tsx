@@ -1,140 +1,138 @@
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../ui/Button'
-import { Zap, Gift, ArrowRight } from 'lucide-react'
+import { useAuthModals } from '../../contexts/AuthModalContext'
+import { Gift, ArrowRight, CheckCircle } from 'lucide-react'
+
+const benefits = [
+  'Résultats visibles en 8 séances',
+  'Séances de seulement 20 minutes',
+  'Coachs certifiés EMS',
+]
 
 export default function Hero() {
+  const { openSignup } = useAuthModals()
+  const navigate = useNavigate()
+
+  const handleSignup = () => {
+    openSignup()
+  }
+
+  const handleViewPricing = () => {
+    navigate('/pricing')
+  }
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-orange-400 to-orange-500">
-      {/* Background Pattern - "ELECTROMED" repeated */}
-      <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
-        <div className="absolute inset-0 flex flex-col justify-center opacity-[0.08]">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="whitespace-nowrap text-[120px] font-black leading-none text-white tracking-tight"
-              style={{
-                transform: `translateX(${i % 2 === 0 ? '-5%' : '5%'})`,
-              }}
-            >
-              ELECTROMED ELECTROMED ELECTROMED ELECTROMED
-            </div>
-          ))}
-        </div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 via-orange-400 to-orange-500 min-h-[600px]">
+      {/* Background Pattern */}
+      <div className="pointer-events-none absolute inset-0 select-none overflow-hidden opacity-[0.05]">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="whitespace-nowrap text-[80px] sm:text-[100px] font-black leading-tight text-white"
+            style={{ transform: `translateX(${i % 2 === 0 ? '-10%' : '0%'})` }}
+          >
+            ELECTROMED ELECTROMED ELECTROMED
+          </div>
+        ))}
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
-          {/* Left Content */}
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+        <div className="max-w-2xl">
+          {/* Promotional Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="relative z-10"
+            transition={{ duration: 0.5 }}
           >
-            {/* Promotional Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mb-6"
-            >
-              <span className="text-orange-100 text-lg font-semibold uppercase tracking-wide">
-                PROFITEZ DE
-              </span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl font-black leading-none sm:text-5xl lg:text-6xl xl:text-7xl">
-              <span className="text-white">VOTRE</span>
-              <br />
-              <span className="text-purple-900">1ÈRE SÉANCE</span>
-              <br />
-              <span className="text-white">OFFERTE*</span>
-            </h1>
-
-            {/* CTA Buttons */}
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <Button
-                variant="primary"
-                size="lg"
-                className="group bg-purple-700 hover:bg-purple-800 text-white font-bold px-8 py-4 rounded-lg shadow-xl shadow-purple-900/30 hover:shadow-2xl transition-all"
-              >
-                <span className="flex items-center gap-2">
-                  S'INSCRIRE !
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Button>
-              <Button
-                variant="secondary"
-                size="lg"
-                className="border-2 border-purple-700 bg-transparent text-purple-900 font-bold px-8 py-4 rounded-lg hover:bg-purple-700/10 transition-all"
-              >
-                VOIR LES TARIFS
-              </Button>
-            </div>
-
-            {/* Bonus Gift */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-6 flex items-center gap-2 text-purple-900 font-bold"
-            >
-              <Gift className="h-5 w-5" />
-              <span>+ UN KIT DE BIENVENUE OFFERT</span>
-            </motion.div>
-
-            {/* Fine Print */}
-            <p className="mt-6 text-sm text-orange-100 max-w-md leading-relaxed">
-              *Offre de Bienvenue valable pour une première inscription à un abonnement
-              mensuel Starter (49€/mois), Premium (79€/mois) ou Elite (99€/mois).
-              Hors frais d'inscription. Engagement 3 mois minimum.
-            </p>
+            <span className="inline-block rounded-full bg-white/20 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm">
+              OFFRE DE LANCEMENT
+            </span>
           </motion.div>
 
-          {/* Right Content - Image Area */}
+          {/* Main Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-6 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl"
+          >
+            Votre{' '}
+            <span className="text-purple-900">1ère séance</span>
+            <br />
+            offerte*
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-6 text-lg text-white/90 max-w-xl"
+          >
+            Transformez votre corps en seulement 20 minutes grâce à l'électrostimulation.
+            L'équivalent de 4h de sport traditionnel !
+          </motion.p>
+
+          {/* Benefits list */}
+          <motion.ul
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6 space-y-3"
+          >
+            {benefits.map((benefit) => (
+              <li key={benefit} className="flex items-center gap-3 text-white">
+                <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                <span className="font-medium">{benefit}</span>
+              </li>
+            ))}
+          </motion.ul>
+
+          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-            className="relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-8 flex flex-col gap-4 sm:flex-row"
           >
-            {/* Badge floating */}
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="absolute -top-2 right-4 z-20 sm:right-8 lg:right-12"
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={handleSignup}
+              className="group bg-purple-700 hover:bg-purple-800 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-purple-900/30 hover:shadow-2xl transition-all"
             >
-              <div className="flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center rounded-full bg-gray-900 text-white shadow-2xl">
-                <div className="text-center">
-                  <span className="block text-xs font-bold text-orange-400">BOOSTEZ</span>
-                  <span className="block text-sm font-black">VOTRE</span>
-                  <span className="block text-lg font-black text-orange-400">CORPS</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Image Placeholder */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br from-orange-300/50 to-orange-600/50 shadow-2xl sm:aspect-[3/4] lg:aspect-[4/5]">
-              {/* Placeholder content - replace with actual image */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white/80">
-                  <Zap className="mx-auto h-16 w-16 mb-4" />
-                  <p className="text-lg font-bold">Image EMS</p>
-                  <p className="text-sm">Personne en séance</p>
-                </div>
-              </div>
-
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-orange-600/40 via-transparent to-transparent" />
-            </div>
+              <span className="flex items-center gap-2">
+                S'INSCRIRE GRATUITEMENT
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Button>
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={handleViewPricing}
+              className="bg-white text-orange-600 font-bold px-8 py-4 rounded-xl hover:bg-orange-50 transition-all border-0"
+            >
+              VOIR LES TARIFS
+            </Button>
           </motion.div>
+
+          {/* Bonus Gift */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-purple-900/20 px-4 py-2 text-white"
+          >
+            <Gift className="h-5 w-5" />
+            <span className="font-semibold">+ Kit de bienvenue offert</span>
+          </motion.div>
+
+          {/* Fine Print */}
+          <p className="mt-8 text-xs text-white/70 max-w-lg">
+            *Offre valable pour une première inscription. Abonnements : Starter (49€/mois),
+            Premium (79€/mois) ou Elite (99€/mois). Engagement 3 mois minimum.
+          </p>
         </div>
       </div>
     </section>

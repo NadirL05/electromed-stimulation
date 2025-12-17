@@ -72,7 +72,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
             placeholder="Jean Dupont"
             className="pl-12"
             {...register('name')}
-            error={(errors as any).name?.message}
+            error={(errors as Record<string, { message?: string }>).name?.message}
           />
         </div>
       )}
@@ -114,7 +114,7 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
             autoComplete="new-password"
             className="pl-12"
             {...register('confirmPassword')}
-            error={(errors as any).confirmPassword?.message}
+            error={(errors as Record<string, { message?: string }>).confirmPassword?.message}
           />
         </div>
       )}

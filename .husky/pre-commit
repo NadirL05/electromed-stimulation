@@ -1,0 +1,3 @@
+#!/bin/sh
+npm run type-check
+# npm run lint  # Temporairement désactivé en raison d'un problème de résolution de modules ESLint

@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import type { User, AuthState } from '../types/auth.types'
 
 interface AuthStore extends AuthState {
-  signup: (email: string, password: string, name: string) => Promise<void>
+  signup: (email: string, password: string, fullName: string) => Promise<void>
   login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
   fetchUser: () => Promise<void>
@@ -21,7 +21,7 @@ export const useAuthStore = create<AuthStore>((set) => {
   error: null,
 
   // Inscription
-  signup: async (email, password, name) => {
+  signup: async (email, password, fullName) => {
     try {
       set({ isLoading: true, error: null })
 
@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthStore>((set) => {
         password,
         options: {
           data: {
-            full_name: name,
+            full_name: fullName,
           },
         },
       })

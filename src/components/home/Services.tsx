@@ -47,7 +47,7 @@ const SERVICES: Service[] = [
 
 export default function Services() {
   return (
-    <section className="mt-24 space-y-12">
+    <section className="mt-20 space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-80px" }}
-              className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-sm p-8 shadow-lg transition-all duration-300 hover:-translate-y-3 hover:border-transparent hover:shadow-2xl hover:shadow-purple-500/20"
+              className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-transparent hover:shadow-2xl"
             >
               {/* Animated background gradient on hover */}
               <div
@@ -93,23 +93,20 @@ export default function Services() {
                 className={`absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br ${service.color} opacity-0 blur-2xl transition-all duration-500 group-hover:opacity-20 group-hover:scale-150`}
               />
 
-              <div className="relative flex items-start gap-6">
-                <div className="relative">
-                  <div
-                    className={`flex h-18 w-18 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color} text-white shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-2xl`}
-                  >
-                    <Icon className="h-9 w-9 transition-transform group-hover:scale-110" />
-                  </div>
-                  <div className={`absolute -inset-2 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 blur-xl transition-opacity group-hover:opacity-30`} />
+              <div className="relative flex items-start gap-5">
+                <div
+                  className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color} text-white shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                >
+                  <Icon className="h-8 w-8" />
                 </div>
-                <div className="flex-1 space-y-3">
+                <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-gray-900 group-hover:to-gray-700 group-hover:bg-clip-text transition-all">
+                    <h3 className="text-lg font-bold text-gray-900">
                       {service.title}
                     </h3>
-                    <ArrowRight className="h-5 w-5 text-gray-300 transition-all duration-300 group-hover:translate-x-2 group-hover:text-purple-500 group-hover:scale-110" />
+                    <ArrowRight className="h-5 w-5 text-gray-300 transition-all duration-300 group-hover:translate-x-2 group-hover:text-blue-500" />
                   </div>
-                  <p className="text-base leading-relaxed text-gray-600">
+                  <p className="text-sm leading-relaxed text-gray-600">
                     {service.description}
                   </p>
                 </div>

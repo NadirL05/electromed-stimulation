@@ -4,7 +4,7 @@ import { Zap, Sparkles, Activity } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative grid gap-12 md:grid-cols-2 md:items-center py-8 md:py-12">
+    <section className="relative grid gap-10 md:grid-cols-2 md:items-center">
       {/* Animated background blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div
@@ -45,37 +45,28 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-          <span className="block bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+          <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
             Transformez votre corps avec l&apos;
           </span>
-          <span className="block bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
+          <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">
             électrostimulation médicale
           </span>
         </h1>
 
-        <p className="max-w-xl text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
+        <p className="max-w-xl text-base text-gray-600 sm:text-lg">
           ElectroMed centralise la gestion de vos séances EMS : planning intelligent, suivi
           des résultats et gestion des abonnements, pour vos franchises et vos coachs.
         </p>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-4">
-          <Button 
-            variant="primary" 
-            size="lg" 
-            className="group relative overflow-hidden bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 hover:scale-105"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-orange-600 via-pink-600 to-purple-700 opacity-0 transition-opacity group-hover:opacity-100" />
-            <span className="relative z-10 flex items-center gap-2 font-semibold">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <Button variant="primary" size="lg" className="group relative overflow-hidden bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40">
+            <span className="relative z-10 flex items-center gap-2">
               Essayer gratuitement
-              <Zap className="h-4 w-4 transition-transform group-hover:rotate-12 group-hover:scale-110" />
+              <Zap className="h-4 w-4 transition-transform group-hover:rotate-12" />
             </span>
           </Button>
-          <Button 
-            variant="secondary" 
-            size="lg" 
-            className="border-2 border-gray-200 bg-white/90 backdrop-blur-sm hover:border-gray-300 hover:bg-white hover:shadow-md transition-all duration-300 hover:scale-105"
-          >
+          <Button variant="secondary" size="lg" className="border-2 border-gray-200 bg-white/80 backdrop-blur-sm hover:border-gray-300 hover:bg-white">
             En savoir plus
           </Button>
         </div>
@@ -127,9 +118,9 @@ export default function Hero() {
             ],
           }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 p-[2px] shadow-2xl"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 p-[2px]"
         >
-          <div className="relative flex h-full min-h-[320px] flex-col justify-between rounded-[1.4rem] bg-white/98 p-8 backdrop-blur-xl shadow-inner">
+          <div className="relative flex h-full min-h-[280px] flex-col justify-between rounded-[1.4rem] bg-white/95 p-6 backdrop-blur-xl">
             {/* Subtle gradient overlay */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-orange-50/50 via-pink-50/30 to-purple-50/50 opacity-50" />
 

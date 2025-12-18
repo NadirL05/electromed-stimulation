@@ -91,9 +91,76 @@ npm run build
 # Le backend utilise le fichier server.js tel quel
 ```
 
-## 🚂 Déploiement sur Railway
+## 🚀 Déploiement sur Vercel
 
-ElectroMed est prêt pour être déployé sur Railway avec **2 services** :
+ElectroMed est prêt pour être déployé sur Vercel en quelques minutes !
+
+### Déploiement Rapide
+
+#### Option 1 : Via l'interface Vercel (Recommandé)
+
+1. **Connectez votre repository GitHub** :
+   - Allez sur [vercel.com](https://vercel.com)
+   - Cliquez sur "New Project"
+   - Importez votre repository GitHub
+
+2. **Configurez le projet** :
+   - **Framework Preset** : Vite (détecté automatiquement)
+   - **Root Directory** : `./` (racine)
+   - **Build Command** : `npm run build` (automatique)
+   - **Output Directory** : `dist` (automatique)
+   - **Install Command** : `npm ci` (automatique)
+
+3. **Ajoutez les variables d'environnement** :
+   - `VITE_SUPABASE_URL` : URL de votre projet Supabase
+   - `VITE_SUPABASE_ANON_KEY` : Clé anonyme Supabase
+
+4. **Déployez** : Cliquez sur "Deploy"
+
+#### Option 2 : Via Vercel CLI
+
+```bash
+# Installez Vercel CLI globalement
+npm i -g vercel
+
+# Connectez-vous à Vercel
+vercel login
+
+# Déployez (première fois)
+vercel
+
+# Déployez en production
+vercel --prod
+```
+
+### Configuration des Variables d'Environnement
+
+Dans le dashboard Vercel, allez dans **Settings > Environment Variables** et ajoutez :
+
+| Variable | Description | Exemple |
+|----------|-------------|---------|
+| `VITE_SUPABASE_URL` | URL de votre projet Supabase | `https://xxxxx.supabase.co` |
+| `VITE_SUPABASE_ANON_KEY` | Clé anonyme Supabase | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
+
+⚠️ **Important** : Les variables doivent commencer par `VITE_` pour être accessibles dans le code client.
+
+### Configuration Automatique
+
+Le fichier `vercel.json` est déjà configuré avec :
+- ✅ Build automatique avec Vite
+- ✅ Routing SPA (toutes les routes → `/index.html`)
+- ✅ Cache optimisé pour les assets statiques
+- ✅ Headers de sécurité
+
+### Redéploiement
+
+Après chaque push sur votre branche principale, Vercel redéploie automatiquement votre application.
+
+---
+
+## 🚂 Déploiement sur Railway (Alternative)
+
+ElectroMed peut aussi être déployé sur Railway avec **2 services** :
 
 ### Déploiement Rapide
 
@@ -105,13 +172,6 @@ ElectroMed est prêt pour être déployé sur Railway avec **2 services** :
 
 📖 **Guide détaillé** : Consultez [`docs/RAILWAY_DEPLOYMENT.md`](docs/RAILWAY_DEPLOYMENT.md)
 🔐 **Variables d'env** : Voir [`docs/RAILWAY_ENV_VARS.md`](docs/RAILWAY_ENV_VARS.md)
-
-### Configuration Automatique
-
-Les fichiers `railway.json` sont déjà configurés :
-- ✅ Frontend : Build automatique avec Vite
-- ✅ Backend : Démarrage avec Express
-- ✅ Health checks configurés
 
 ## 📁 Structure du Projet
 ```

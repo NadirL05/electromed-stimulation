@@ -22,8 +22,8 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-gray-200/50 bg-gradient-to-b from-white via-gray-50/50 to-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="mt-auto border-t border-gray-200 bg-gradient-to-b from-[#F9FAFB] to-white">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Contact & Social */}
           <div>
-            <h4 className="mb-5 text-sm font-bold text-gray-900 uppercase tracking-wide">Nous suivre</h4>
+            <h4 className="mb-4 text-sm font-semibold text-[#111827]">Nous suivre</h4>
             <div className="flex items-center gap-3">
               {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
@@ -85,9 +85,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Suivre ElectroMed sur ${label}`}
-                  className="group flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 backdrop-blur-sm text-gray-600 shadow-md ring-1 ring-gray-200/50 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-gradient-to-br hover:from-orange-500 hover:via-pink-500 hover:to-purple-600 hover:text-white hover:shadow-xl hover:shadow-orange-500/30 hover:ring-0"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#6B7280] shadow-sm ring-1 ring-gray-100 transition hover:-translate-y-0.5 hover:text-[#2563EB] hover:shadow-md"
                 >
-                  <Icon className="h-5 w-5 transition-transform group-hover:scale-110" />
+                  <Icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
@@ -95,12 +95,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200/50 pt-8 sm:flex-row">
-          <p className="text-sm text-gray-500">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 sm:flex-row">
+          <p className="text-sm text-[#9CA3AF]">
             © {new Date().getFullYear()} ElectroMed. Tous droits réservés.
           </p>
-          <p className="text-xs text-gray-400 flex items-center gap-1.5">
-            Fait avec <span className="text-red-500 animate-pulse">❤️</span> en France
+          <p className="text-xs text-[#9CA3AF]">
+            Fait avec ❤️ en France
           </p>
         </div>
       </div>

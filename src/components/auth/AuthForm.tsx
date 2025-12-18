@@ -48,8 +48,8 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
         const { email, password } = values as LoginFormValues
         await login(email, password)
       } else {
-        const { email, password, name } = values as SignupFormValues
-        await signup(email, password, name)
+        const { email, password, fullName } = values as SignupFormValues
+        await signup(email, password, fullName)
       }
       rateLimit.reset()
       onSuccess?.()
@@ -71,8 +71,8 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
             label="Nom complet"
             placeholder="Jean Dupont"
             className="pl-12"
-            {...register('name')}
-            error={(errors as Record<string, { message?: string }>).name?.message}
+            {...register('fullName' as const)}
+            error={(errors as Record<string, { message?: string }>)?.fullName?.message}
           />
         </div>
       )}
@@ -113,8 +113,8 @@ export default function AuthForm({ mode, onSuccess }: AuthFormProps) {
             placeholder="••••••••"
             autoComplete="new-password"
             className="pl-12"
-            {...register('confirmPassword')}
-            error={(errors as Record<string, { message?: string }>).confirmPassword?.message}
+            {...register('confirmPassword' as const)}
+            error={(errors as Record<string, { message?: string }>)?.confirmPassword?.message}
           />
         </div>
       )}

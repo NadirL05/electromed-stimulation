@@ -1,0 +1,15 @@
+node_modules
+.git
+.vscode
+.idea
+*.log
+.env.local
+.env.*.local
+dist
+.snapshots
+backend
+database
+docs
+Dockerfile
+nixpacks.toml
+

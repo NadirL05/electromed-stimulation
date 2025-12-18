@@ -65,7 +65,7 @@ export default function PricingSection() {
   }
 
   return (
-    <section className="mt-24 space-y-12" id="pricing">
+    <section className="mt-20 space-y-8" id="pricing">
       <motion.div 
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -91,53 +91,46 @@ export default function PricingSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className={`relative rounded-3xl p-8 transition-all duration-300 ${
+            className={`relative rounded-3xl p-6 transition-all duration-300 ${
               plan.popular
-                ? 'z-10 scale-105 bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-2xl shadow-orange-500/40 ring-4 ring-orange-500/20 hover:scale-110'
-                : 'bg-white/90 backdrop-blur-sm shadow-lg ring-1 ring-gray-100 hover:shadow-2xl hover:-translate-y-2 hover:ring-purple-200'
+                ? 'z-10 scale-105 bg-gradient-to-b from-[#2563EB] to-[#1D4ED8] text-white shadow-2xl shadow-[#2563EB]/30 ring-4 ring-[#2563EB]/20'
+                : 'bg-white shadow-lg ring-1 ring-gray-100 hover:shadow-xl'
             }`}
           >
             {/* Popular badge */}
             {plan.popular && (
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
-                <motion.span 
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 px-5 py-2 text-xs font-bold text-white shadow-xl shadow-orange-500/50"
-                >
-                  <Star className="h-4 w-4 fill-white animate-pulse" />
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F97316] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
+                  <Star className="h-3.5 w-3.5 fill-white" />
                   Le plus populaire
-                </motion.span>
+                </span>
               </div>
             )}
 
             {/* Header */}
-            <div className="mb-8 pt-2">
-              <div className="flex items-center gap-3">
-                <h3 className={`text-2xl font-extrabold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+            <div className="mb-6 pt-2">
+              <div className="flex items-center gap-2">
+                <h3 className={`text-xl font-bold ${plan.popular ? 'text-white' : 'text-[#111827]'}`}>
                   {plan.name}
                 </h3>
-                {plan.name === 'Elite' && (
-                  <Zap className={`h-6 w-6 ${plan.popular ? 'text-yellow-300' : 'text-orange-500'} animate-pulse`} />
-                )}
+                {plan.name === 'Elite' && <Zap className="h-5 w-5 text-[#F97316]" />}
               </div>
-              <p className={`mt-2 text-base leading-relaxed ${plan.popular ? 'text-white/90' : 'text-gray-600'}`}>
+              <p className={`mt-1 text-sm ${plan.popular ? 'text-blue-100' : 'text-[#6B7280]'}`}>
                 {plan.description}
               </p>
             </div>
 
             {/* Price */}
-            <div className="mb-8">
-              <div className="flex items-baseline gap-2">
-                <span className={`text-5xl font-extrabold ${plan.popular ? 'text-white' : 'text-gray-900'}`}>
+            <div className="mb-6">
+              <div className="flex items-baseline gap-1">
+                <span className={`text-4xl font-bold ${plan.popular ? 'text-white' : 'text-[#111827]'}`}>
                   {plan.price}
                 </span>
-                <span className={`text-lg ${plan.popular ? 'text-white/80' : 'text-gray-600'}`}>
+                <span className={`text-sm ${plan.popular ? 'text-blue-200' : 'text-[#6B7280]'}`}>
                   {plan.period}
                 </span>
               </div>
-              <p className={`mt-2 text-base font-semibold ${plan.popular ? 'text-white/90' : 'text-gray-700'}`}>
+              <p className={`mt-1 text-sm font-medium ${plan.popular ? 'text-blue-100' : 'text-[#111827]'}`}>
                 {plan.sessions}
               </p>
             </div>
@@ -162,11 +155,7 @@ export default function PricingSection() {
             <Button
               variant={plan.popular ? 'secondary' : 'primary'}
               size="lg"
-              className={`w-full font-semibold transition-all duration-300 hover:scale-105 ${
-                plan.popular 
-                  ? 'bg-white text-purple-600 hover:bg-gray-50 hover:shadow-xl shadow-lg' 
-                  : 'bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 shadow-lg shadow-orange-500/30'
-              }`}
+              className={`w-full ${plan.popular ? 'bg-white text-[#2563EB] hover:bg-blue-50' : ''}`}
               onClick={handleChoosePlan}
             >
               {isAuthenticated ? 'Voir les crédits' : 'Commencer maintenant'}

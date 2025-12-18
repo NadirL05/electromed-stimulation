@@ -26,18 +26,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky inset-x-0 top-0 z-50 border-b border-gray-200/50 bg-white/90 shadow-sm backdrop-blur-xl backdrop-saturate-150">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <header className="sticky inset-x-0 top-0 z-40 border-b border-white/20 bg-white/80 shadow-sm backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link
             to="/"
-            className="group flex items-center gap-3 text-xl font-bold"
+            className="group flex items-center gap-2.5 text-lg font-bold"
             onClick={closeMenus}
           >
-            <span className="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/30 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-xl group-hover:shadow-orange-500/50">
-              <Zap className="h-5 w-5 transition-transform group-hover:scale-110" />
-              <span className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-400 via-pink-400 to-purple-500 opacity-0 blur-md transition-opacity group-hover:opacity-50" />
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/30 transition-all group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-500/40">
+              <Zap className="h-5 w-5" />
             </span>
-            <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent transition-all group-hover:from-orange-600 group-hover:via-pink-600 group-hover:to-purple-600">
+            <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
               ElectroMed
             </span>
           </Link>
@@ -48,21 +47,18 @@ export default function Navbar() {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `relative transition-all duration-200 ${
+                  `relative transition-colors ${
                     isActive || location.pathname === item.to
                       ? 'text-transparent bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text font-semibold'
-                      : 'text-gray-600 hover:text-gray-900 hover:scale-105'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <span className="relative z-10">{item.label}</span>
+                    {item.label}
                     {(isActive || location.pathname === item.to) && (
-                      <>
-                        <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
-                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 animate-pulse" />
-                      </>
+                      <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600" />
                     )}
                   </>
                 )}
@@ -75,7 +71,6 @@ export default function Navbar() {
               variant="ghost"
               size="sm"
               onClick={() => setIsLoginOpen(true)}
-              className="hover:bg-gray-100/80 transition-all duration-200"
             >
               Connexion
             </Button>
@@ -83,7 +78,6 @@ export default function Navbar() {
               variant="primary"
               size="sm"
               onClick={() => setIsSignupOpen(true)}
-              className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 hover:scale-105"
             >
               Essayer gratuitement
             </Button>
@@ -100,7 +94,7 @@ export default function Navbar() {
         </div>
 
         {isMobileOpen && (
-          <div className="border-t border-gray-200/50 bg-white/95 backdrop-blur-xl px-4 py-4 shadow-lg md:hidden">
+          <div className="border-t border-white/10 bg-white/80 px-4 py-3 shadow-md md:hidden">
             <nav className="flex flex-col gap-2 text-sm font-medium">
               {navItems.map((item) => (
                 <NavLink

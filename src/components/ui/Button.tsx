@@ -18,11 +18,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ].join(' ')
     
     const variants = {
-      primary: 'bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white shadow-lg shadow-orange-500/30 hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 hover:shadow-xl hover:shadow-orange-500/40 focus-visible:ring-orange-500 transition-all duration-300',
-      secondary: 'border-2 border-gray-200 bg-white/90 backdrop-blur-sm text-gray-900 hover:border-gray-300 hover:bg-white hover:shadow-md focus-visible:ring-gray-400 transition-all duration-300',
-      ghost: 'text-gray-700 hover:bg-gray-100/80 focus-visible:ring-gray-400 transition-all duration-200',
-      danger: 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/30 hover:from-red-600 hover:to-red-700 hover:shadow-xl hover:shadow-red-500/40 focus-visible:ring-red-500 transition-all duration-300',
-      success: 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-xl hover:shadow-emerald-500/40 focus-visible:ring-emerald-500 transition-all duration-300',
+      primary: 'bg-[#2563EB] text-white shadow-lg shadow-[#2563EB]/25 hover:bg-[#1D4ED8] hover:shadow-[#2563EB]/40 focus-visible:ring-[#2563EB]',
+      secondary: 'border border-gray-200 bg-white text-[#111827] hover:border-[#2563EB]/40 hover:bg-[#EFF6FF] focus-visible:ring-[#2563EB]',
+      ghost: 'text-[#2563EB] hover:bg-[#EFF6FF] focus-visible:ring-[#2563EB]',
+      danger: 'bg-red-500 text-white shadow-lg shadow-red-500/25 hover:bg-red-600 focus-visible:ring-red-500',
+      success: 'bg-[#10B981] text-white shadow-lg shadow-[#10B981]/25 hover:bg-[#059669] focus-visible:ring-[#10B981]',
     }
 
     const sizes = {

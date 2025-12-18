@@ -12,7 +12,7 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "pre-commit": "npm run type-check",
-    "prepare": "husky"
+    "prepare": "node -e \"try { require('fs').statSync('.git'); require('husky').install() } catch(e) {}\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
